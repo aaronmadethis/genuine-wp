@@ -1,0 +1,14 @@
+#update-wrapper .single-update .post-thumb{
+	max-width: 300px;
+	max-height: 175px;
+	overflow: hidden;
+	}
+	#update-wrapper .single-update .post-thumb img{
+		margin-top: -50px;
+		max-width: none;
+		width: auto;
+		height: auto;
+		}
+#update-wrapper .single-update .post-meta{
+	padding-top: 3em
+	}
