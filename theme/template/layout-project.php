@@ -37,7 +37,7 @@
 						<li class="image-wrap slideshow myhide <?php echo $txt_color; ?>" style="background-color:<?php echo $bg_color; ?>">
 							<div class="preloader_png"></div>
 							<div class="inner-image-wrap">
-								<div class="inner-image-container">
+								<div class="inner-image-container p-wrap">
 								<a class="img-next" href="#"><img class="<?php echo $img_class; ?> center myhide add-loader" src="<?php echo $full_size[0]; ?>" alt="<?php echo $image['alt']; ?>" data-image-id="<?php echo $image['id']; ?>" data-width="<?php echo $full_size[1]; ?>" data-height="<?php echo $full_size[2]; ?>" /></a>
 									<?php if($i_data['description']) : ?>
 										<span class="myhide caption description"><?php echo $i_data['description']; ?></span>
@@ -57,13 +57,13 @@
 
 <div  class="thumb-wrapper transition-2">
 	<div class="thumb-grid grid-hide transition-2">
-		<ul class="clearfix">
+		<ul class="thumb-menu clearfix">
 			<?php $loop_counter = 0; ?>
 			<?php foreach( $images as $image ): ?>
 				<?php
 					$thumb_size = wp_get_attachment_image_src($image['id'], 'fullscreen');
 				?>
-				<li>
+				<li class="<?php if($loop_counter == 0) echo 'active'; ?>">
 					<a class="thumb" href="">
 						<div class="thumb-image" style="background-image: url(<?php echo $thumb_size[0]; ?>);" data-image-id="<?php echo $image['id']; ?>"></div>
 					</a>

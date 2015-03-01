@@ -75,7 +75,6 @@ jQuery(document).ready(function($) {
 		$('ul.slides li:first').imagesLoaded( function() {
 			$('ul.slides li:first .preloader_png').fadeOut(500);
 			$('ul.slides li:first img, ul.slides li:first span').css({'visibility': 'visible'}).animate({opacity: 1}, 750);
-			//$('ul.slides li:first span').css({'visibility': 'visible'}).animate({opacity: 1}, 750);
 		});
 		
 		var $arrows = "<div class='arrow left-arrow transition-2'><a class='transition-2' href='#'></a></div><div class='arrow right-arrow transition-2'><a class='transition-2' href='#'></a></div>";
@@ -90,11 +89,11 @@ jQuery(document).ready(function($) {
 
 	$('.thumb-grid .thumb').click(function(e) {
 		jump_image($(this), e);
+		swap_active($('.nav-view .single'));
 		e.preventDefault();
 	});
 
 	function jump_image(obj, ev){
-		//$('.arrow').unbind( "click" );
 		$('body').removeClass('nav-grid-open').addClass('nav-grid-close');
 
 		var current,
@@ -107,12 +106,14 @@ jQuery(document).ready(function($) {
 		}
 
 		check_color(next);
+		//$('ul.thumb-menu li').eq(current).removeClass('active');
+		$('ul.thumb-menu li.active').removeClass('active');
+		$('ul.thumb-menu li').eq(next).addClass('active');
 
 		$('ul.slides li').eq(current).removeClass('active').animate({opacity: 0}, 750, function(){
 			$('ul.slides li').eq(next).addClass('active').css({'visibility': 'visible'}).animate({opacity: 1}, 750, function(){
 				$(this).imagesLoaded( function() {
 					$('ul.slides li').eq(next).find('.preloader_png').fadeOut({ duration: 100, queue: false, complete: function (){
-							//obj.click(function() { change_slideshow(obj) });
 						}
 					});
 					$('ul.slides li').eq(next).find('img').css({'visibility': 'visible'}).animate({opacity: 1}, { duration: 750, queue: false });
@@ -165,6 +166,8 @@ jQuery(document).ready(function($) {
 		}
 
 		check_color(next);
+		$('ul.thumb-menu li.active').removeClass('active');
+		$('ul.thumb-menu li').eq(next).addClass('active');
 
 		$('ul.slides li').eq(current).removeClass('active').animate({opacity: 0}, 750, function(){
 			$(this).css({'visibility': 'visible'});
@@ -197,34 +200,7 @@ jQuery(document).ready(function($) {
 
 	/* ---------------------------------------------------------------------------------------
 	NAV MENU OPEN AND CLOSE
-	--------------------------------------------------------------------------------------- 
-	$('.open-nav-menu, .close-nav-menu').click(function(e) {
-	    var open, top;
-	    top = $(document).scrollTop();
-	    open = $('body').is('.nav-menu-open');
-	    $('body').toggleClass('nav-menu-open', !open);
-	    if (!$("html").is(".ie")) {
-	        if (open) {
-	            setTimeout(function() {
-	                return $('.primary-header, .nav-menu').css('top', 0);
-	            }, 500);
-	        } else {
-	            $('.primary-header, .nav-menu').css('top', top);
-	        }
-	    }
-	    e.preventDefault();
-	    return e.stopPropagation();
-	});
-	$('.nav-menu a').click(function(e) {
-	    return e.stopPropagation();
-	});
-	$('body').click(function(e) {
-	    if ($('body').is('.nav-menu-open')) {
-	        $('body').removeClass('nav-menu-open');
-	        return $('.primary-header, .nav-menu').css('top', 0);
-	    }
-	});
-*/
+	--------------------------------------------------------------------------------------- */
 	$('.side-nav-closed').hover(function() {
   		var open, top;
 	    top = $(document).scrollTop();
@@ -232,6 +208,22 @@ jQuery(document).ready(function($) {
 	    $('body').toggleClass('nav-menu-open', !open);
 	});
 
+
+	$('.enlarge a').click(function(e) {
+		var open;
+	    open = $('.layout-featured').is('.big-img');
+	    $('.layout-featured').toggleClass('big-img', !open);
+	    console.log('click');
+	    e.preventDefault();
+	});
+
+	$('.layout-featured .myclose a').click(function(e) {
+  		var open;
+	    open = $('.layout-featured').is('.big-img');
+	    $('.layout-featured').toggleClass('big-img', !open);
+	    console.log('click');
+	    e.preventDefault();
+	});
 
 
 	/* ---------------------------------------------------------------------------------------
@@ -252,8 +244,8 @@ jQuery(document).ready(function($) {
 		
 		$('.center.no-crop').each(function(i) {
 			var img = $(this),
-				p_w = $(this).parent().width(),
-				p_h = $(this).parent().height(),
+				p_w = $(this).closest('.p-wrap').width(),
+				p_h = $(this).closest('.p-wrap').height(),
 				p_r = p_w / p_h,
 				img_w = $(img).attr('data-width'),
 				img_h = $(img).attr('data-height'),
@@ -269,8 +261,8 @@ jQuery(document).ready(function($) {
 		});
 		$('.center.crop').each(function(i) {
 			var img = $(this),
-				p_w = $(this).parent().width(),
-				p_h = $(this).parent().height(),
+				p_w = $(this).closest('.p-wrap').width(),
+				p_h = $(this).closest('.p-wrap').height(),
 				p_r = p_w / p_h,
 				img_w = $(img).attr('data-width'),
 				img_h = $(img).attr('data-height'),

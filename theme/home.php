@@ -7,19 +7,17 @@ USE FRONT_PAGE TEMPLATE FOR THE TRUE HOME PAGE
 ?>
 <?php get_header(); ?>
 
-<?php if ( have_posts() ) : ?>
-	<?php while ( have_posts() ) : the_post(); ?>
-		<article <?php post_class("clearfix"); ?> >
-			<?php
-			$post_id = get_the_ID();
-			$img_size = 'post-thumbnail';
-			$thumb = ap_better_thunbnails( $post_id, $img_size );
-			?>
-			<h1><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h1>
-			<img src="<?php echo $thumb[0]; ?>">
-			<div class="home"><?php the_content(); ?></div>
-		</article>
-	<?php endwhile; ?>
-<?php endif; /*have_posts*/ ?>
+<div class="layout-blogroll">
+	<div class="layout-basic">
+		<?php if ( have_posts() ) : ?>
+			<?php while ( have_posts() ) : the_post(); ?>
+				
+			 	<?php amt_get_template_part('blogroll', 'post'); ?>
+
+			<?php endwhile; ?>
+		<?php endif; /*have_posts*/ ?>
+	</div>
+</div>
+
 
 <?php get_footer(); ?>

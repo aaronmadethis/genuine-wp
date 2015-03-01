@@ -1,4 +1,4 @@
-<div class="layout-featured clearfix">
+<div class="layout-featured single post clearfix">
 	<div class="layout-basic transition-2">
 		<?php
 			$featured = get_sub_field('featured_post');

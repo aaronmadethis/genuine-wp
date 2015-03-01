@@ -10,6 +10,7 @@ if ( function_exists( 'add_theme_support' ) ) {
 if ( function_exists( 'add_image_size' ) ) { 
 	add_image_size( 'fullscreen', 2880, 1800, false );
 	add_image_size( 'blog-roll', 1520, 968, true );
+	add_image_size( 'portrait', 636, 980, true );
 	add_image_size( 'gallery_thumb', 800, 800, true );
 	add_image_size( 'gallery_mason', 390, 9999, false);
 }
@@ -214,7 +215,7 @@ function amt_interface_single_portfolio(){
 	if(amt_check_portfolio_template()){
 		amt_get_template_part('single', 'portfolio');
 	}else{
-		amt_get_template_part('single', 'blog');
+		amt_get_template_part('single', 'post');
 	}
 }
 

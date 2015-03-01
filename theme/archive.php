@@ -1,15 +1,21 @@
-<?php /* ---- archive template ---- */ ?>
+<?php /*
+ ---- archive page template ---- 
+NOTE: SAME AS HOME TEMPLATE
+*/
+?>
 <?php get_header(); ?>
 
-<?php if ( have_posts() ) : ?>
-	<?php while ( have_posts() ) : the_post(); ?>
+<div class="layout-blogroll">
+	<div class="layout-basic">
+		<?php if ( have_posts() ) : ?>
+			<?php while ( have_posts() ) : the_post(); ?>
+				
+			 	<?php amt_get_template_part('blogroll', 'post'); ?>
 
-		<article <?php post_class(); ?> >
-			<h1><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h1>
-			<div class="home"><?php the_content(); ?></div>
-		</article>
-		
-	<?php endwhile; ?>
-<?php endif; /*have_posts*/ ?>
+			<?php endwhile; ?>
+		<?php endif; /*have_posts*/ ?>
+	</div>
+</div>
+
 
 <?php get_footer(); ?>

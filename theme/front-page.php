@@ -1,13 +1,27 @@
-<?php /* ---- front-page template ---- */ ?>
+<?php /* ---- page template ---- */ ?>
 <?php get_header(); ?>
 
 <?php if ( have_posts() ) : ?>
 	<?php while ( have_posts() ) : the_post(); ?>
-		
-		<div <?php post_class("clearfix"); ?> >
-			<h1><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h1>
-			<?php the_content(); ?>
-		</div>
+
+		<?php
+		// check if the flexible content field has rows of data
+		if( have_rows('layouts') ):
+		 
+		     // loop through the rows of data
+		    while ( have_rows('layouts') ) : the_row();
+		 		$layout = get_row_layout();
+		 		echo '<div class="layout-container">';
+		 			amt_get_template_part('home', $layout);
+		 		echo '</div>';
+		    endwhile;
+		 
+		else :
+
+			amt_get_template_part('home', 'basic');	
+
+		endif;
+		?>
 
 	<?php endwhile; ?>
 <?php endif; /*have_posts*/ ?>
