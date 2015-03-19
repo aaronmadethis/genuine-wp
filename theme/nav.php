@@ -5,8 +5,8 @@
 	if( is_front_page() ){ $nav_init = "side-nav"; }
 ?>
 <header class="<?php echo $nav_init; ?> transition-2">
-	<div class="nav-wrapper">
-		<div class="nav-container">
+	<div class="nav-wrapper transition-2">
+		<div class="nav-container transition-2">
 			<a href="#" class="open-nav transition-2">MENU</a>
 			<a href="<?php echo home_url(); ?>"><div class="logo"></div></a>
 

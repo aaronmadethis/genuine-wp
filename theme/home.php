@@ -8,7 +8,7 @@ USE FRONT_PAGE TEMPLATE FOR THE TRUE HOME PAGE
 <?php get_header(); ?>
 
 <div class="layout-blogroll">
-	<div class="layout-basic">
+	<div class="layout-basic clearfix">
 		<?php if ( have_posts() ) : ?>
 			<?php while ( have_posts() ) : the_post(); ?>
 				

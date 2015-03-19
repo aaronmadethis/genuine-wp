@@ -35,13 +35,35 @@ HELP WITH EMAIL FORM
 ================================================================================ */
 add_filter( 'wp_mail_from', 'my_mail_from' );
 function my_mail_from( $email ) {
-    return "info@aaronmadethis.com.com";
+    return "michael@makeitgenuine.nyc";
 }
 
 add_filter( 'wp_mail_from_name', 'my_mail_from_name' );
 function my_mail_from_name( $name ){
-    return "Aaron Made This";
+    return "Make It Genuine";
 }
+
+
+/* ================================================================================
+ADDING QUERY TO URL FOR IMAGES
+================================================================================ */
+function add_query_vars($aVars) {
+	$aVars[] = "slideshow_img"; // represents the name of the product category as shown in the URL
+	return $aVars;
+}
+ 
+// hook add_query_vars function into query_vars
+add_filter('query_vars', 'add_query_vars');
+
+function add_rewrite_rules($aRules) {
+	//$aNewRules = array('(.?.+?)/slide-img/([^/]+)/?$' => 'index.php?pagename=$matches[1]&slideshow_img=$matches[2]');
+	$aNewRules = array('(.?.+?)/slide-img/([^/]+)?$' => 'index.php?pagename=$matches[1]&slideshow_img=$matches[2]', '(.?.+?)/slide-img/?$' => 'index.php?pagename=$matches[1]&slideshow_img=0');
+	$aRules = $aNewRules + $aRules;
+	return $aRules;
+}
+ 
+// hook add_rewrite_rules function into rewrite_rules_array
+add_filter('rewrite_rules_array', 'add_rewrite_rules');
 
 /* ================================================================================
 REMOVE POSTS AND COMMENTS FROM ADMIN
